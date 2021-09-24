@@ -18,7 +18,7 @@ export const Register = () => {
       `https://grasperapi.azurewebsites.net/api/v1/Users/register`,
       {
         method: "POST",
-        headers: { "Content-Type": "plaintext/form-data" },
+        headers: { "Content-Type": "text/json" },
         body: JSON.stringify({
           firstName: firstname,
           lastName: lastname,
