@@ -22,7 +22,7 @@ export const Signals = () => {
       const token = await getCookie()[1];
       console.log(token);
       const response = await fetch(
-        `http://localhost:8010/proxy/api/v1/Signals?Page=1&Limit=25`,
+        `https://grasperapi.azurewebsites.net/api/v1/Signals?Page=1&Limit=25`,
         {
           method: "GET",
           headers: {
