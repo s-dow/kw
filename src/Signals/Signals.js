@@ -28,6 +28,7 @@ export const Signals = () => {
 
   useEffect(() => {
     (async () => {
+      event.preventDefault();
       const token = await getCookie("token");
 
       const response = await fetch(

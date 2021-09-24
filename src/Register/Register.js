@@ -61,6 +61,7 @@ export const Register = () => {
       };
 
       async function signInUser() {
+        event.preventDefault();
         const email2 = email;
         const password2 = await getCookie("password");
 
