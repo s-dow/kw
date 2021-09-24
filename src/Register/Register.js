@@ -70,10 +70,8 @@ export const Register = () => {
           }
         );
         const responseData = await response.json();
-
+        console.log(responseData);
         if (response.status === 200) {
-          localStorage.email = email;
-          localStorage.password = password;
           window.location = "/signals";
         } else {
           alert("Try Again.");

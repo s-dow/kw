@@ -11,23 +11,23 @@ export const Signals = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [signalsPerPage] = useState(10);
 
-  const getCookie = (cname) => {
-    let name = cname + "=";
-    let ca = document.cookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == " ") {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  };
-
   useEffect(() => {
     (async () => {
+      const getCookie = (cname) => {
+        let name = cname + "=";
+        let ca = document.cookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      };
+
       const token = await getCookie("token");
 
       const response = await fetch(
