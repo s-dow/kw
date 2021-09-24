@@ -1,0 +1,120 @@
+.homeLink {
+  text-decoration: none;
+}
+
+@media only screen and (min-width: 980px) and (max-width: 1200px) {
+  .containerSignal {
+    margin-top: 35%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .containerSignal {
+    margin-top: 5%;
+  }
+}
+
+@media only screen and (min-width: 780px) and (max-width: 980px) {
+  .containerSignal {
+    margin-top: 55%;
+  }
+}
+
+@media only screen and (min-width: 450px) and (max-width: 780px) {
+  .containerSignal {
+    margin-top: 70%;
+  }
+}
+
+th {
+  font-size: 20px;
+  text-align: center;
+}
+
+.titleSignal {
+  margin-top: 15px;
+  font-size: 40px;
+  margin-bottom: 20px;
+  background-color: rgba(164, 190, 170, 0.9);
+  border-radius: 8px;
+  padding: 15px;
+  color: #eee;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: rgba(164, 190, 170, 0.9);
+  color: #fff;
+}
+/* https://elvery.net/demo/responsive-tables/ */
+@media only screen and (min-width: 100px) and (max-width: 450px) {
+  /* Force table to not be like tables anymore */
+
+  .containerSignal {
+    margin-top: 630%;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: inline-block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+  }
+
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+
+    position: relative;
+    // padding-left: 60%;
+    // white-space: normal;
+
+    text-align: right;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 100%;
+
+    text-overflow: ellipsis;
+  }
+
+  .desc {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 7px;
+    left: 4px;
+    width: 30%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  /*
+	Label the data
+	*/
+  td:before {
+    content: attr(data-title);
+  }
+}
