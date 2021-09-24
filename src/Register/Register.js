@@ -13,13 +13,12 @@ export const Register = () => {
     const lastname = event.target.lastname.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    console.log(firstname, email, env.AUTH_CODE);
 
     const response = await fetch(
       `https://grasperapi.azurewebsites.net/api/v1/Users/register`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "plaintext/form-data" },
         body: JSON.stringify({
           firstName: firstname,
           lastName: lastname,

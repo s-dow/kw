@@ -1,4 +1,3 @@
-import "./Layout.scss";
 import { Register } from "../Register/Register";
 import { SignIn } from "../SignIn/SignIn";
 

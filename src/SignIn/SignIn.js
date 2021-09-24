@@ -13,7 +13,7 @@ export const SignIn = () => {
       `https://grasperapi.azurewebsites.net/api/v1/Users/authenticate`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "plaintext/form-data" },
         body: JSON.stringify({
           email: email,
           password: password,
