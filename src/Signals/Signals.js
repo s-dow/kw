@@ -33,6 +33,7 @@ export const Signals = () => {
       const response = await fetch(
         `https://grasperapi.azurewebsites.net/api/v1/Signals?Page=1&Limit=25`,
         {
+          mode: "cors",
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
