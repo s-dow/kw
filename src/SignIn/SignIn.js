@@ -28,15 +28,16 @@ export const SignIn = () => {
       let expires = "expires=" + d.toUTCString();
       document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
+    setCookie("token", data.token, 90);
 
-    function saveToken() {
-      setCookie("token", data.token, {
-        expires: "Fri Jan 01 11:59:59 UTC",
-        path: "/",
-      });
-    }
+    // function saveToken() {
+    //   setCookie("token", data.token, {
+    //     expires: "Fri Jan 01 11:59:59 UTC",
+    //     path: "/",
+    //   });
+    // }
 
-    saveToken();
+    // saveToken();
 
     if (response.status === 200) {
       localStorage.email = email;

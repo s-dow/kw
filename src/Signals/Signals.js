@@ -11,18 +11,27 @@ export const Signals = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [signalsPerPage] = useState(10);
 
-  const getCookie = () => {
-    const cookie = document.cookie;
-    const token = cookie.split("=");
-    return token;
+  const getCookie = (cname) => {
+    let name = cname + "=";
+    let ca = document.cookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   };
 
   useEffect(() => {
     (async () => {
-      const token = await getCookie()[1];
-      console.log(token);
+      const token = await getCookie("token");
+
       const response = await fetch(
-        `https://grasperapi.azurewebsites.net/api/v1/Signals?Page=1&Limit=25`,
+        `http://localhost:8010/proxy/api/v1/Signals?Page=1&Limit=25`,
         {
           method: "GET",
           headers: {
@@ -30,6 +39,7 @@ export const Signals = () => {
           },
         }
       );
+
       const data = await response.json();
       setSignals(data.items);
     })();

@@ -29,13 +29,64 @@ export const Register = () => {
       }
     );
 
-    if (response.status === 200) {
-      localStorage.email = email;
-      localStorage.password = password;
-      window.location = "/signals";
-    } else {
-      alert("Try Again.");
-    }
+    const data = await response.json().then((res) => {
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+      setCookie("password", password, 90);
+
+      const getCookie = (cname) => {
+        let name = cname + "=";
+        let ca = document.cookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      };
+
+      async function signInUser() {
+        const email2 = email;
+        const password2 = await getCookie("password");
+
+        const response = await fetch(
+          `https://grasperapi.azurewebsites.net/api/v1/Users/authenticate`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "text/json" },
+            body: JSON.stringify({
+              email: email2,
+              password: password2,
+            }),
+          }
+        );
+        const responseData = await response.json();
+
+        if (response.status === 200) {
+          localStorage.email = email;
+          localStorage.password = password;
+          window.location = "/signals";
+        } else {
+          alert("Try Again.");
+        }
+      }
+      signInUser();
+    });
   };
 
   return (
