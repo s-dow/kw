@@ -68,7 +68,15 @@ export const Register = () => {
           }
         );
         const responseData = await response.json();
-        console.log(responseData);
+
+        function setCookieToken(cname, cvalue, exdays) {
+          const d = new Date();
+          d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+          let expires = "expires=" + d.toUTCString();
+          document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+        setCookieToken("token", responseData.token, 90);
+
         if (response.status === 200) {
           window.location = "/signals";
         } else {

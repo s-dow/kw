@@ -30,15 +30,6 @@ export const SignIn = () => {
     }
     setCookie("token", data.token, 90);
 
-    // function saveToken() {
-    //   setCookie("token", data.token, {
-    //     expires: "Fri Jan 01 11:59:59 UTC",
-    //     path: "/",
-    //   });
-    // }
-
-    // saveToken();
-
     if (response.status === 200) {
       localStorage.email = email;
       localStorage.password = password;

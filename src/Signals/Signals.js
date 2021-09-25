@@ -10,10 +10,11 @@ export const Signals = () => {
   const [signals, setSignals] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [signalsPerPage] = useState(10);
+  const [token, setToken] = useState(" ");
 
   useEffect(() => {
-    async function getSignals() {
-      const getCookie = (cname) => {
+    async function getToken() {
+      function getCookie(cname) {
         let name = cname + "=";
         let ca = document.cookie.split(";");
         for (let i = 0; i < ca.length; i++) {
@@ -26,9 +27,9 @@ export const Signals = () => {
           }
         }
         return "";
-      };
-
-      const token = getCookie("token");
+      }
+      const token = await getCookie("token");
+      setToken(getCookie(token));
 
       (function () {
         var cors_api_host = "calm-brook-48240.herokuapp.com";
@@ -50,21 +51,24 @@ export const Signals = () => {
         };
       })();
 
-      const response = await fetch(
-        `https://calm-brook-48240.herokuapp.com/https://grasperapi.azurewebsites.net/api/v1/Signals?Page=1&Limit=25`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      (async () => {
+        const response = await fetch(
+          `https://grasperapi.azurewebsites.net/api/v1/Signals?Page=1&Limit=25`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      const data = await response.json();
-      setSignals(data.items);
+        const data = await response.json();
+
+        setSignals(data.items);
+      })();
     }
 
-    getSignals();
+    getToken();
   }, []);
 
   const indexOfLastSignal = currentPage * signalsPerPage;
