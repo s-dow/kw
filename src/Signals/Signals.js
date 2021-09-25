@@ -28,7 +28,7 @@ export const Signals = () => {
 
   useEffect(() => {
     (async () => {
-      const token = await getCookie("token");
+      const token = getCookie("token");
 
       const response = await fetch(
         `http://localhost:8010/proxy/api/v1/Signals?Page=1&Limit=25`,
