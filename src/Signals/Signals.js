@@ -12,7 +12,7 @@ export const Signals = () => {
   const [signalsPerPage] = useState(10);
 
   useEffect(() => {
-    (async () => {
+    async function getSignals() {
       const getCookie = (cname) => {
         let name = cname + "=";
         let ca = document.cookie.split(";");
@@ -62,7 +62,9 @@ export const Signals = () => {
 
       const data = await response.json();
       setSignals(data.items);
-    })();
+    }
+
+    getSignals();
   }, []);
 
   const indexOfLastSignal = currentPage * signalsPerPage;
