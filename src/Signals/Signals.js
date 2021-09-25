@@ -30,8 +30,28 @@ export const Signals = () => {
 
       const token = getCookie("token");
 
+      (function () {
+        var cors_api_host = "calm-brook-48240.herokuapp.com";
+        var cors_api_url = "https://" + cors_api_host + "/";
+        var slice = [].slice;
+        var origin = window.location.protocol + "//" + window.location.host;
+        var open = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function () {
+          var args = slice.call(arguments);
+          var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
+          if (
+            targetOrigin &&
+            targetOrigin[0].toLowerCase() !== origin &&
+            targetOrigin[1] !== cors_api_host
+          ) {
+            args[1] = cors_api_url + args[1];
+          }
+          return open.apply(this, args);
+        };
+      })();
+
       const response = await fetch(
-        `https://cors-anywhere.herokuapp.com/https://grasperapi.azurewebsites.net/api/v1/Signals?Page=1&Limit=25`,
+        `https://calm-brook-48240.herokuapp.com/https://grasperapi.azurewebsites.net/api/v1/Signals?Page=1&Limit=25`,
         {
           method: "GET",
           headers: {
