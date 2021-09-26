@@ -98,12 +98,12 @@ export const Signals = () => {
         >
           <thead>
             <tr>
-              <th>alarmNum</th>
-              <th>eventCodeDesc</th>
-              <th>pointDesc</th>
-              <th>signalCode</th>
-              <th>xmit</th>
-              <th>siteDate</th>
+              <th>Alarm Num</th>
+              <th>Event Code Description</th>
+              <th>Point Description</th>
+              <th>Signal Code</th>
+              <th>Xmit</th>
+              <th>Site Date</th>
             </tr>
           </thead>
           <tbody>

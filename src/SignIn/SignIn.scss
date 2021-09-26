@@ -87,8 +87,11 @@ body {
 }
 
 @media only screen and (min-width: 100px) and (max-width: 450px) {
-  .registerContainer {
-    width: 100%;
+  .registerContainer,
+  .signinContainer {
+    width: 95%;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
 .registerLink {
