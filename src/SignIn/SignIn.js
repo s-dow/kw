@@ -31,8 +31,6 @@ export const SignIn = () => {
     setCookie("token", data.token, 90);
 
     if (response.status === 200) {
-      localStorage.email = email;
-      localStorage.password = password;
       window.location = "/signals";
     } else {
       alert("Incorrect e-mail or password.");

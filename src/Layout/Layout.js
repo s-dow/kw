@@ -1,7 +1,7 @@
 import { Register } from "../Register/Register";
 import { SignIn } from "../SignIn/SignIn";
-
-import { Signals } from "../Signals/Signals";
+import { SigTest } from "../Signals/SigTest";
+// import { Signals } from "../Signals/Signals";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -11,7 +11,7 @@ export const Layout = () => {
       <div className="container container-fluid">
         <Switch>
           <Route path="/signals">
-            <Signals />
+            <SigTest />
           </Route>
           <Route path="/register">
             <Register />

@@ -14,20 +14,17 @@ export const Register = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    const response = await fetch(
-      `https://grasperapi.azurewebsites.net/api/v1/Users/register`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: firstname,
-          lastName: lastname,
-          email: email,
-          password: password,
-          authCode: env.REACT_APP_AUTH_CODE,
-        }),
-      }
-    ).then((res) => {
+    await fetch(`https://grasperapi.azurewebsites.net/api/v1/Users/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        firstName: firstname,
+        lastName: lastname,
+        email: email,
+        password: password,
+        authCode: env.REACT_APP_AUTH_CODE,
+      }),
+    }).then((res) => {
       function setCookie(cname, cvalue, exdays) {
         const d = new Date();
         d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);

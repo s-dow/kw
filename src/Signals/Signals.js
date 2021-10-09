@@ -10,7 +10,6 @@ export const Signals = () => {
   const [signals, setSignals] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [signalsPerPage] = useState(10);
-  const [token, setToken] = useState(" ");
 
   useEffect(() => {
     async function getToken() {
@@ -29,7 +28,6 @@ export const Signals = () => {
         return "";
       }
       const token = await getCookie("token");
-      setToken(getCookie(token));
 
       (function () {
         var cors_api_host = "calm-brook-48240.herokuapp.com";
@@ -39,7 +37,7 @@ export const Signals = () => {
         var open = XMLHttpRequest.prototype.open;
         XMLHttpRequest.prototype.open = function () {
           var args = slice.call(arguments);
-          var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
+          var targetOrigin = /^https?:\/\/([^]+)/i.exec(args[1]);
           if (
             targetOrigin &&
             targetOrigin[0].toLowerCase() !== origin &&
@@ -98,12 +96,12 @@ export const Signals = () => {
         >
           <thead>
             <tr>
-              <th>Alarm Num</th>
-              <th>Event Code Description</th>
-              <th>Point Description</th>
-              <th>Signal Code</th>
-              <th>Xmit</th>
-              <th>Site Date</th>
+              <th style={{ width: "125px" }}>Alarm Num</th>
+              <th style={{ width: "250px" }}>Event Code Description</th>
+              <th style={{ width: "350px" }}>Point Description</th>
+              <th style={{ width: "150px" }}>Signal Code</th>
+              <th style={{ width: "125px" }}>Xmit</th>
+              <th style={{ width: "125px" }}>Site Date</th>
             </tr>
           </thead>
           <tbody>
