@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import dateFormat from "dateformat";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faSignal } from "@fortawesome/free-solid-svg-icons";
-import { Pagination } from "../Pagination/Pagination";
 import { Link } from "react-router-dom";
+import { Pagination } from "../Pagination/Pagination";
 
 export const Signals = () => {
   const [signals, setSignals] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(1);
   const [signalsPerPage] = useState(10);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const Signals = () => {
 
       (async () => {
         const response = await fetch(
-          `https://grasperapi.azurewebsites.net/api/v1/Signals?Page=1&Limit=25`,
+          `https://grasperapi.azurewebsites.net/api/v1/Signals?Page=${page}`,
           {
             method: "GET",
             headers: {
@@ -67,13 +67,14 @@ export const Signals = () => {
     }
 
     getToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const indexOfLastSignal = currentPage * signalsPerPage;
+  const indexOfLastSignal = page * signalsPerPage;
   const indexOfFirstSignal = indexOfLastSignal - signalsPerPage;
   const currentSignals = signals.slice(indexOfFirstSignal, indexOfLastSignal);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setPage(pageNumber);
 
   return (
     <div className="containerSignal">
