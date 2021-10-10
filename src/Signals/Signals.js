@@ -4,12 +4,12 @@ import dateFormat from "dateformat";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faSignal } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { Pagination } from "../Pagination/Pagination";
+import Pagination from "@mui/material/Pagination";
 
 export const Signals = () => {
   const [signals, setSignals] = useState([]);
   const [page, setPage] = useState(1);
-  const [signalsPerPage] = useState(10);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     async function getToken() {
@@ -51,7 +51,7 @@ export const Signals = () => {
 
       (async () => {
         const response = await fetch(
-          `https://grasperapi.azurewebsites.net/api/v1/Signals?Page=${page}`,
+          `https://grasperapi.azurewebsites.net/api/v1/Signals?Page=${page}&Limit=10`,
           {
             method: "GET",
             headers: {
@@ -63,18 +63,16 @@ export const Signals = () => {
         const data = await response.json();
 
         setSignals(data.items);
+        setCount(data.numPages);
       })();
     }
 
     getToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [page]);
 
-  const indexOfLastSignal = page * signalsPerPage;
-  const indexOfFirstSignal = indexOfLastSignal - signalsPerPage;
-  const currentSignals = signals.slice(indexOfFirstSignal, indexOfLastSignal);
-
-  const paginate = (pageNumber) => setPage(pageNumber);
+  const paginate = (event, value) => {
+    setPage(value);
+  };
 
   return (
     <div className="containerSignal">
@@ -106,8 +104,8 @@ export const Signals = () => {
             </tr>
           </thead>
           <tbody>
-            {currentSignals ? (
-              currentSignals.map((signal) => {
+            {signals ? (
+              signals.map((signal) => {
                 return (
                   <tr key={signal.signalId}>
                     <td data-title="Alarm #">{signal.alarmNum}</td>
@@ -132,9 +130,15 @@ export const Signals = () => {
         </table>
       </div>
       <Pagination
-        paginate={paginate}
-        signalsPerPage={signalsPerPage}
-        totalSignals={signals.length}
+        className="my-3 pagination"
+        count={count}
+        page={page}
+        siblingCount={1}
+        boundaryCount={1}
+        showLastButton={true}
+        onChange={paginate}
+        variant="outlined"
+        size="small"
       />
     </div>
   );
