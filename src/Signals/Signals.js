@@ -51,7 +51,7 @@ export const Signals = () => {
 
       (async () => {
         const response = await fetch(
-          `https://grasperapi.azurewebsites.net/api/v1/Signals?Page=${page}&Limit=10`,
+          `https://grasperapi.azurewebsites.net/api/v1/Signals?Page=${page}&Limit=25`,
           {
             method: "GET",
             headers: {
@@ -72,6 +72,7 @@ export const Signals = () => {
 
   const paginate = (event, value) => {
     setPage(value);
+    window.scrollTo(0, 0);
   };
 
   return (
