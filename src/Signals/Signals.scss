@@ -87,13 +87,14 @@ tbody tr:nth-child(odd) {
     position: relative;
     text-align: right;
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 3.77vw;
     width: 100%;
     text-overflow: ellipsis;
   }
 
   .desc {
     width: 100%;
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -103,14 +104,14 @@ tbody tr:nth-child(odd) {
     /* Now like a table header */
     position: absolute;
     /* Top/left values mimic padding */
-    top: 7px;
-    left: 4px;
+    top: 10px;
+    left: 10px;
     width: 30%;
     padding-right: 10px;
     white-space: nowrap;
     text-align: left;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 3.4vw;
   }
 
   /*
